@@ -125,3 +125,19 @@ data = [
 		color: 'blue'
 	}
 ];
+
+//------------
+//COMMENTS
+//------------
+//funzione per creare le card
+//con un template per le card dinamico con le proprietà dell'oggetto
+
+// ciclo for per stampare in pagina tutte le card
+
+// salvo in una variabile con ciclo filter i diversi elementi per type
+//ES.= data.filter(element) return element.type == user/vegetable/animal
+
+// creata una select in html attribuisco le variabili filtrate ad ogni value
+
+// e con un ciclo for o forEach stampo in pagina con la funzione i differenti elementi dipende la condizione
+// ES.= user/animal/vegetables.forEach((element) => { });
