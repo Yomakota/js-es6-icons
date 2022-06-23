@@ -127,23 +127,32 @@ const allIcons = [
 ];
 
 
+// Richiamo il mio elemento HTML a cui voglio inserire tutte le mie cards
+const iconContainer = document.querySelector('.js-all-card');
+
+// Richiamo il mio elemento HTML select
+const selectCategory = document.querySelector('#category');
+
 // GENERATORE COLORE RANDOM PER OGNI ELEMENTO DELLE CARDS 
 allIcons.forEach((element) => {
 	element.color = generateColor();
 });
 
-// Richiamo il mio elemento HTML a cui voglio inserire tutte le mie cards
-const iconContainer = document.querySelector('.js-all-card');
-
 // FUNCTION PER POPOLARE IL DOM
 printCards(allIcons, iconContainer);
+
+
+//POPOLARE OPTION NELLA SELECT
+// appendere le option alla mia select #category
+const iconForType = getIconTypes(allIcons);
+printOption(iconForType);
 
 
 // ----------------------
 //     EVENT CHANGE
 // ----------------------
-// CATEGORIZZO LE CARDS DA STAMPARE IN BASE ALLA SCELTA DELL'UTENTE 
-const selectCategory = document.querySelector('#category');
+
+
 // Reset dei valori a All per ogni volta che l'utente fa refresh della pagina
 selectCategory.value = 'all';
 
@@ -174,6 +183,8 @@ selectCategory.addEventListener('change',
 // --------------------
 // 		FUNCTION
 // --------------------
+
+
 // Popolazione DOM
 function printCards(array, container) {
 	array.forEach((element) => {
@@ -216,23 +227,32 @@ function getRndInteger(min, max) {
 
 //BONUS
 // 2 - popolare le options della select della milestone 3 dinamicamente.
-let optionValue = 'all';
 
-allIcons.forEach((element) => {
+// funzione per prendere le icon per tipo
+function getIconTypes (array) {
 
-	if (optionValue == 'all') {
+	// dove salvare le icon per type solo se non gia compreso
+	const types = [];
 
-		const opt = `<option value="${optionValue}">All</option>`;
-		optionValue = false;
+	array.forEach((object) => {
 
-		selectCategory.innerHTML += opt;
+		if(!types.includes(object.type)) {
+			types.push(object.type);
+		}
+	});
+	return types;
+}
 
-	} else if (optionValue !== element.type) {
-		
-		const opt = `<option value="${element.type}">${element.type}</option>`;
-		optionValue = element.type;
+// funzione per stampare le option nella select
+function printOption (array) {
 
-		selectCategory.innerHTML += opt;
-	}
+	const selectCategory = document.querySelector('#category');
+	array.forEach((element)=>{
+
+	const newOption =`<option value = ${element}> ${element} </option>`;
+
+	selectCategory.innerHTML += newOption;
 
 });
+
+}
